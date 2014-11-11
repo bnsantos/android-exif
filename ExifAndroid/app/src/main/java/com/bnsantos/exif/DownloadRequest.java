@@ -11,7 +11,13 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
+import com.drew.imaging.ImageMetadataReader;
+import com.drew.metadata.Directory;
+import com.drew.metadata.Metadata;
+import com.drew.metadata.Tag;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 
@@ -29,6 +35,27 @@ public class DownloadRequest extends Request<String> {
 
     @Override
     protected Response<String> parseNetworkResponse(NetworkResponse response) {
+        try {
+            // Extract metadata.
+            final Metadata metadata = ImageMetadataReader.readMetadata(new BufferedInputStream(new ByteArrayInputStream(response.data)), false);    // true for streaming
+
+            // Log each directory.
+            for (Directory directory : metadata.getDirectories()) {
+                Log.d("LOG_EXIF", "Directory: " + directory.getName());
+
+                // Log all errors.
+                for (String error : directory.getErrors()) {
+                    Log.d("LOG_EXIF", "> error: " + error);
+                }
+
+                // Log all tags.
+                for (Tag tag : directory.getTags()) {
+                    Log.d("LOG_EXIF", "> tag: " + tag.getTagName() + " = " + tag.getDescription());
+                }
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
 
         File photo = new File(Environment.getExternalStorageDirectory(), "photo.jpg");
 
