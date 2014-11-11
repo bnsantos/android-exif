@@ -6,5 +6,28 @@
     <string name="url_hint">Type image Url</string>
     <string name="default_url">https://s3.amazonaws.com/ctlmediadev/users/54074ecceba6e1654883542f/files/54577884ae76447750d71e23/profile.jpg</string>
     <string name="action_settings">Settings</string>
+    <string name="error_downloading">Ops.. Something went wrong</string>
+    <string name="ok">Ok</string>
 
+    <string name="aperture">Aperture: %s</string>
+    <string name="date_time">Date Time: %s</string>
+    <string name="exposure_time">Exposure time: %s</string>
+    <string name="flash">Flash: %s</string>
+    <string name="focal_length">Focal length: %s</string>
+    <string name="altitude">Altitude: %s</string>
+    <string name="altitude_ref">Altitude ref: %s</string>
+    <string name="gps_datestamp">GPS datestamp: %s</string>
+    <string name="gps_lat">GPS latitude: %s</string>
+    <string name="gps_lat_ref">GPS latitude ref: %s</string>
+    <string name="gps_lon">GPS longitude: %s</string>
+    <string name="gps_lon_ref">GPS longitude: %s</string>
+    <string name="gps_processing_method">GPS Processing method: %s</string>
+    <string name="gps_timestamp">GPS timestamp: %s</string>
+    <string name="image_length">Length: %s</string>
+    <string name="image_width">Width: %s</string>
+    <string name="iso">ISO: %s</string>
+    <string name="make">Make: %s</string>
+    <string name="model">Model: %s</string>
+    <string name="orientation">Orientation: %s</string>
+    <string name="white_balance">White balance: %s</string>
 </resources>

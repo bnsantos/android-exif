@@ -1,6 +1,7 @@
 package com.bnsantos.exif;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,9 +23,11 @@ public class MainActivity extends Activity implements Response.ErrorListener, Re
     private Button mDownload;
     private ImageButton mLeft;
     private ImageButton mRight;
+    private ImageButton mInfo;
     private EditText mUrl;
     private ImageView mImageView;
     private float mRotation = 0;
+    private Uri mPicture;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,7 @@ public class MainActivity extends Activity implements Response.ErrorListener, Re
         mDownload = (Button) findViewById(R.id.downloadButton);
         mLeft = (ImageButton) findViewById(R.id.rotateLeftButton);
         mRight = (ImageButton) findViewById(R.id.rotateRightButton);
+        mInfo = (ImageButton) findViewById(R.id.infoButton);
         mUrl = (EditText) findViewById(R.id.downloadUrl);
         mImageView = (ImageView) findViewById(R.id.imageView);
     }
@@ -61,6 +65,12 @@ public class MainActivity extends Activity implements Response.ErrorListener, Re
             @Override
             public void onClick(View v) {
                 rotate(ROTATE_RIGHT);
+            }
+        });
+        mInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showImageExifInfo();
             }
         });
     }
@@ -101,18 +111,29 @@ public class MainActivity extends Activity implements Response.ErrorListener, Re
 
     @Override
     public void onErrorResponse(VolleyError error) {
-        Toast.makeText(this, "Ops", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.error_downloading, Toast.LENGTH_SHORT).show();
         enableButtons(true);
     }
 
     @Override
     public void onResponse(String response) {
-        Toast.makeText(this, response, Toast.LENGTH_SHORT).show();
+        setImageView(response);
         enableButtons(true);
     }
 
     private void rotate(float degrees) {
         mRotation += degrees;
         mImageView.setRotation(mRotation);
+    }
+
+    private void setImageView(String uri) {
+        mPicture = Uri.parse(uri);
+        mImageView.setImageURI(mPicture);
+    }
+
+    private void showImageExifInfo() {
+        if (mPicture != null) {
+            new ExifInfoDialog(mPicture).show(getFragmentManager(), "ExifInfo");
+        }
     }
 }
