@@ -1,5 +1,8 @@
 package com.bnsantos.exif;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Environment;
 import android.util.Log;
 
 import com.android.volley.NetworkResponse;
@@ -9,7 +12,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 
-import java.io.UnsupportedEncodingException;
+import java.io.File;
+import java.io.FileOutputStream;
 
 /**
  * Created by bruno on 11/11/14.
@@ -25,12 +29,25 @@ public class DownloadRequest extends Request<String> {
 
     @Override
     protected Response<String> parseNetworkResponse(NetworkResponse response) {
+
+        File photo = new File(Environment.getExternalStorageDirectory(), "photo.jpg");
+
+        if (photo.exists()) {
+            photo.delete();
+        }
+
         try {
-            String jsonString = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
-            return Response.success(jsonString, HttpHeaderParser.parseCacheHeaders(response));
-        } catch (UnsupportedEncodingException e) {
+            Bitmap image = BitmapFactory.decodeByteArray(response.data, 0, response.data.length);
+            FileOutputStream fos = new FileOutputStream(photo.getPath());
+            image.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.flush();
+            fos.close();
+            return Response.success(photo.getAbsolutePath(), HttpHeaderParser.parseCacheHeaders(response));
+        } catch (java.io.IOException e) {
+            Log.e("PictureDemo", "Exception in photoCallback", e);
             return Response.error(new ParseError(e));
         }
+
     }
 
     @Override
