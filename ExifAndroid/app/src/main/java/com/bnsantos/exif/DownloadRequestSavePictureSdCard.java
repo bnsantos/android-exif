@@ -24,17 +24,18 @@ import java.io.FileOutputStream;
 /**
  * Created by bruno on 11/11/14.
  */
-public class DownloadRequest extends Request<String> {
-    private static final String TAG = DownloadRequest.class.getSimpleName();
+public class DownloadRequestSavePictureSdCard extends Request<String> {
+    private static final String TAG = DownloadRequestSavePictureSdCard.class.getSimpleName();
     protected final Response.Listener<String> mListener;
 
-    public DownloadRequest(String url, Response.ErrorListener errorListener, Response.Listener<String> listener) {
+    public DownloadRequestSavePictureSdCard(String url, Response.ErrorListener errorListener, Response.Listener<String> listener) {
         super(Method.GET, url, errorListener);
         mListener = listener;
     }
 
     @Override
     protected Response<String> parseNetworkResponse(NetworkResponse response) {
+        //Exif info extracted using lib
         try {
             // Extract metadata.
             final Metadata metadata = ImageMetadataReader.readMetadata(new BufferedInputStream(new ByteArrayInputStream(response.data)), false);    // true for streaming

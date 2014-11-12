@@ -31,6 +31,12 @@
             android:id="@+id/downloadButton" />
     </LinearLayout>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/download_mode"
+        android:id="@+id/downloadMode" />
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
