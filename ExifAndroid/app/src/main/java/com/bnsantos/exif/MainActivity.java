@@ -1,14 +1,14 @@
 package com.bnsantos.exif;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,54 +16,51 @@ import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.squareup.picasso.Picasso;
 
 
 public class MainActivity extends Activity implements Response.ErrorListener {
     private static final float ROTATE_LEFT = -90f;
     private static final float ROTATE_RIGHT = 90f;
 
-    private Button mDownload;
     private ImageButton mLeft;
     private ImageButton mRight;
     private ImageButton mInfo;
-    private EditText mUrl;
     private ImageView mImageView;
     private float mRotation = 0;
     private Uri mPicture;
+    private Mode mMode;
     private DownloadType mDownloadType = DownloadType.BITMAP;
     private final FileListener mFileListener = new FileListener();
     private final BitmapListener mBitmapListener = new BitmapListener();
     private TextView mDownloadMode;
 
+
+    public static void start(Context context, Mode mode, Uri uri) {
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.putExtra(Mode.class.getName(), mode.name());
+        intent.setData(uri);
+        context.startActivity(intent);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_choose);
 
         initViews();
         initListeners();
-
-        mDownloadMode.setText(getString(R.string.download_mode, mDownloadType.name()));
+        extractIntentData(getIntent());
     }
 
     private void initViews() {
-        mDownload = (Button) findViewById(R.id.downloadButton);
         mLeft = (ImageButton) findViewById(R.id.rotateLeftButton);
         mRight = (ImageButton) findViewById(R.id.rotateRightButton);
         mInfo = (ImageButton) findViewById(R.id.infoButton);
-        mUrl = (EditText) findViewById(R.id.downloadUrl);
-        mImageView = (ImageView) findViewById(R.id.imageView);
-        mDownloadMode = (TextView) findViewById(R.id.downloadMode);
+        //mImageView = (ImageView) findViewById(R.id.imageView);
     }
 
     private void initListeners() {
-        mDownload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                downloadPicture();
-            }
-        });
-
         mLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,6 +79,14 @@ public class MainActivity extends Activity implements Response.ErrorListener {
                 showImageExifInfo();
             }
         });
+    }
+
+    private void extractIntentData(Intent intent) {
+        if (intent != null) {
+            mPicture = intent.getData();
+            mMode = Mode.valueOf(intent.getStringExtra(Mode.class.getName()));
+            Picasso.with(this).load(mPicture).fit().into(mImageView);
+        }
     }
 
 
@@ -114,13 +119,12 @@ public class MainActivity extends Activity implements Response.ErrorListener {
     }
 
     private void enableButtons(boolean enable) {
-        mDownload.setEnabled(enable);
         mLeft.setEnabled(enable);
         mRight.setEnabled(enable);
     }
 
     private void downloadPicture() {
-        enableButtons(false);
+        /*enableButtons(false);
         switch (mDownloadType) {
             case FILE:
                 App.getInstance().getRequestQueue().add(new DownloadRequestSavePictureSdCard(mUrl.getText().toString(), this, mFileListener));
@@ -128,7 +132,7 @@ public class MainActivity extends Activity implements Response.ErrorListener {
             case BITMAP:
                 App.getInstance().getRequestQueue().add(new DownloadRequestBitmapRotate(mUrl.getText().toString(), this, mBitmapListener));
                 break;
-        }
+        }*/
     }
 
     @Override

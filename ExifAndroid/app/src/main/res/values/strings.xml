@@ -9,7 +9,6 @@
     <string name="action_download_bitmap">Bitmap mode</string>
     <string name="error_downloading">Ops.. Something went wrong</string>
     <string name="ok">Ok</string>
-
     <string name="aperture">Aperture: %s</string>
     <string name="date_time">Date Time: %s</string>
     <string name="exposure_time">Exposure time: %s</string>
@@ -31,6 +30,14 @@
     <string name="model">Model: %s</string>
     <string name="orientation">Orientation: %s</string>
     <string name="white_balance">White balance: %s</string>
-
     <string name="download_mode">Download mode: %s</string>
+    <string name="title_activity_pick_image">PickImageActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="choose_image">Choose Image</string>
+    <string name="pick_gallery">Choose from gallery</string>
+    <string name="save_locally">Save image locally</string>
+    <string name="stream_image">Open image without saving in device</string>
+    <string name="title_activity_image">ImageActivity</string>
+
 </resources>
