@@ -1,4 +1,4 @@
-package com.bnsantos.exif;
+package com.bnsantos.exif.activities;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.bnsantos.exif.ExifInfoDialog;
+import com.bnsantos.exif.Mode;
+import com.bnsantos.exif.R;
 import com.squareup.picasso.Picasso;
 
 
@@ -78,7 +81,7 @@ public class ImageActivity extends Activity {
 
     private void showImage() {
         if (mUri != null) {
-            Picasso.with(this).load(mUri).centerInside().fit().into(mImageView);
+            Picasso.with(this).load(mUri).error(android.R.color.holo_red_dark).centerInside().fit().into(mImageView);
         }
     }
 

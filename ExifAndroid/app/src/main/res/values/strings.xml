@@ -4,7 +4,7 @@
     <string name="app_name">ExifAndroid</string>
     <string name="download">Download</string>
     <string name="url_hint">Type image Url</string>
-    <string name="default_url">https://s3.amazonaws.com/ctlmediadev/users/54074ecceba6e1654883542f/files/54577884ae76447750d71e23/profile.jpg</string>
+    <string name="default_url">http://fredericiana.com/media/2013/monalisa.jpg</string>
     <string name="action_download_file">File mode</string>
     <string name="action_download_bitmap">Bitmap mode</string>
     <string name="error_downloading">Ops.. Something went wrong</string>
