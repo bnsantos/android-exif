@@ -8,9 +8,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.bnsantos.exif.ExifInfoDialog;
 import com.bnsantos.exif.Mode;
 import com.bnsantos.exif.R;
+import com.bnsantos.exif.dialogs.ExifInfoDialog;
 import com.squareup.picasso.Picasso;
 
 

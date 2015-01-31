@@ -7,9 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-import com.bnsantos.exif.DownloadTask;
 import com.bnsantos.exif.Mode;
 import com.bnsantos.exif.R;
+import com.bnsantos.exif.taks.DownloadTask;
 
 
 public class ChooseActivity extends Activity {

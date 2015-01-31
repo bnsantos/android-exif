@@ -1,4 +1,4 @@
-package com.bnsantos.exif;
+package com.bnsantos.exif.taks;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

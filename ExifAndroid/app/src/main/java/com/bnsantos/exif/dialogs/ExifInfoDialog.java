@@ -1,4 +1,4 @@
-package com.bnsantos.exif;
+package com.bnsantos.exif.dialogs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
+
+import com.bnsantos.exif.R;
 
 import java.io.IOException;
 
